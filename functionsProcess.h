@@ -5,6 +5,7 @@
 
 
 void displayScreen(char Page_frames[], char Table_Page_Frames[Default_Length][Default_Length], int Page_Fault[], int Number_page, int length_PageFrames) {
+    // Hàm xuất ra màn hình
     printf("\n");
     for (int i = 0; i < length_PageFrames; i++)
     {
@@ -31,6 +32,7 @@ void displayScreen(char Page_frames[], char Table_Page_Frames[Default_Length][De
 }
 
 void checkPageFault(int Page_Fault[],char Table_Page_Frames[][Default_Length], int Rows, int Columns) {
+    // Hàm kiểm tra lỗi trang
     Page_Fault[0] = 1;
     for (int i = 1; i < Columns; i++)
     {
@@ -47,6 +49,7 @@ void checkPageFault(int Page_Fault[],char Table_Page_Frames[][Default_Length], i
 }
 
 void countPage(int index_Page[], int Number_page) {
+    // Hàm đếm số lần lưu lại trên khung trang
     for (int i = 0; i < Number_page; i++)
     {
         index_Page[i]++;
@@ -54,6 +57,7 @@ void countPage(int index_Page[], int Number_page) {
 }
 
 void resetValueOfCount(int A[], int length) {
+    // Hàm đặt giá trị bộ đếm(số lần lưu lại trên khung trang) về 0
     for (int i = 0; i < length; i++)
     {
         A[i] = 0;
@@ -61,6 +65,7 @@ void resetValueOfCount(int A[], int length) {
 }
 
 void resetValueOfPageFrams(char A[]) {
+    // Hàm reset values chuỗi tham chiếu
     for (int i = 0; i < Default_Length; i++)
     {
         A[i] = ' ';
@@ -68,12 +73,14 @@ void resetValueOfPageFrams(char A[]) {
 }
 
 int lengthArray(char Page_frames[]) {
+    // Hàm tính độ dài thật sự của một mảng
     int index = 0;
     while (Page_frames[index] != '\0' && Page_frames[index] != ' ') index++;
     return index;
 }
 
 void resetValueOfTable(char A[][Default_Length], int Rows, int Columns) {
+    //  Hàm reset values của bảng lưu các khung trang
     for (int i = 0; i < Rows; i++)
     {
         for (int j = 0; j < Columns; j++)
@@ -84,6 +91,7 @@ void resetValueOfTable(char A[][Default_Length], int Rows, int Columns) {
 }
 
 int selectRowChange(char Page_frames[], int index_Page[], int Number_page) {
+    // Hàm chọn vị trí trong khung trang sẽ bị thay trong thuật toán FIFO và LRU
     int max = index_Page[0];
     int selection = 0;
     for (int i = 0; i < Number_page; i++)
@@ -98,7 +106,8 @@ int selectRowChange(char Page_frames[], int index_Page[], int Number_page) {
 }
 
 int checkValueinTable(char Table_Page_Frames[][Default_Length], char Page, int Number_page, int Columns_Frames_Current) {
-    if (Columns_Frames_Current != 0)
+    // Hàm kiểm tra kiểm tra giá trị tham chiếu có nằm sẵn trong khung trang hay không.
+    if (Columns_Frames_Current)
     {
         for (int i = 0; i < Number_page; i++)
         {
@@ -109,6 +118,7 @@ int checkValueinTable(char Table_Page_Frames[][Default_Length], char Page, int N
 }
 
 void pasteColumnToColumn(char Table_Page_Frames[][Default_Length], int Number_page, int column_Current) {
+    // Hàm sao lưu values của khung trang lên bảng lưu đã tạo trước đó.
     for (int i = 0; i < Number_page; i++)
     {
         Table_Page_Frames[i][column_Current] = Table_Page_Frames[i][column_Current-1];
@@ -116,7 +126,8 @@ void pasteColumnToColumn(char Table_Page_Frames[][Default_Length], int Number_pa
 }
 
 int checkPositionValueinTable(char Table_Page_Frames[][Default_Length], char Page, int Number_page, int Columns_Frames_Current) {
-    if (Columns_Frames_Current != 0)
+    // Hàm xác định vị trí lúc giá trị của chuỗi tham chiếu có sẵn trong khung trang
+    if (Columns_Frames_Current)
     {
         for (int i = 0; i < Number_page; i++)
         {
@@ -126,6 +137,7 @@ int checkPositionValueinTable(char Table_Page_Frames[][Default_Length], char Pag
 }
 
 int checkPositionValueinPageFrames(char Table_Page_Frames[][Default_Length], char Page_frames[], int length_PageFrames, int Number_page, int column_Current) {
+    //  Hàm chọn vị trí trong khung trang sẽ bị thay trong thuật toán OPT
     int index_Max = 0;
     int selection = 0;
     if (column_Current)

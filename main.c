@@ -3,11 +3,17 @@
 #include"functionsProcess.h"
 
 void FIFOFunction(char Page_frames[], int Number_page) {
+    // Tạo biến lưu độ dài của chuỗi tham chiếu
     int length_PageFrames = lengthArray(Page_frames);
+    // Tạo mảng lưu lỗi khung trang
     int Page_Fault[20];
+    // Tạo bảng lưu values của khung trang mỗi lần tham chiếu
     char Table_Page_Frames[20][20];
+    // Reset values của bảng lưu các khung trang
     resetValueOfTable(Table_Page_Frames, length_PageFrames, Number_page);
+    // Tạo mảng lưu bộ đếm(số lần lưu lại trên khung trang).
     int index_Page[20];
+    //  Đặt giá trị bộ đếm(số lần lưu lại trên khung trang) về 0
     resetValueOfCount(index_Page, Number_page);
     for (int i = 0; i < length_PageFrames; i++)
     {
@@ -26,9 +32,13 @@ void FIFOFunction(char Page_frames[], int Number_page) {
 }
 
 void OPTFunction(char Page_frames[], int Number_page) {
+    // Tạo biến lưu độ dài của chuỗi tham chiếu
     int length_PageFrames = lengthArray(Page_frames);
+    // Tạo mảng lưu lỗi khung trang
     int Page_Fault[20];
+    // Tạo bảng lưu values của khung trang mỗi lần tham chiếu
     char Table_Page_Frames[20][20];
+    // Reset values của bảng lưu các khung trang
     resetValueOfTable(Table_Page_Frames, length_PageFrames, Number_page);
     for (int i = 0; i < length_PageFrames; i++)
     {
@@ -43,12 +53,19 @@ void OPTFunction(char Page_frames[], int Number_page) {
     checkPageFault(Page_Fault, Table_Page_Frames, Number_page, length_PageFrames);
     displayScreen(Page_frames, Table_Page_Frames, Page_Fault, Number_page, length_PageFrames);
 }
+
 void LRUFunction(char Page_frames[], int Number_page) {
+    // Tạo biến lưu độ dài của chuỗi tham chiếu
     int length_PageFrames = lengthArray(Page_frames);
+    // Tạo mảng lưu lỗi khung trang
     int Page_Fault[20];
+    // Tạo bảng lưu values của khung trang mỗi lần tham chiếu
     char Table_Page_Frames[20][20];
+    // Reset values của bảng lưu các khung trang
     resetValueOfTable(Table_Page_Frames, length_PageFrames, Number_page);
+    // Tạo mảng lưu bộ đếm(số lần lưu lại trên khung trang).
     int index_Page[20];
+    //  Đặt giá trị bộ đếm(số lần lưu lại trên khung trang) về 0
     resetValueOfCount(index_Page, Number_page);
     for (int i = 0; i < length_PageFrames; i++)
     {
@@ -71,11 +88,10 @@ void LRUFunction(char Page_frames[], int Number_page) {
     displayScreen(Page_frames, Table_Page_Frames, Page_Fault, Number_page, length_PageFrames);
 }
 
-void displayMenu(char Page_frames[], char* check) {
+void displayMenu(char Page_frames[]) {
     printf("\n\t--- Page Replacement algorithm ---");
     printf("\n\t1. Default referenced sequence");
     printf("\n\t2. Manual input sequence");
-    printf("\n\t3. Exit");
     printf("\n\tPress number to choose");
     char n;
     n = _getch();
@@ -99,12 +115,9 @@ void displayMenu(char Page_frames[], char* check) {
         printf("\nInput sequence: ");
         gets(Page_frames);
         break;
-    case '3':
-        break;
     default:
-    printf("\nPress again");
+        break;
     }
-    *check = n;
 }
 
 void displayInputFrames(int* Number_page) {
@@ -113,7 +126,7 @@ void displayInputFrames(int* Number_page) {
     scanf("%d", Number_page);
 }
 
-void displayOption(char Page_frames[], char* check, int Number_page) {
+void displayOption(char Page_frames[], int Number_page) {
     printf("\n\t--- Page Replacement algorithm ---");
     printf("\n1. FIFO algorithm");
     printf("\n2. OPT algorithm");
@@ -133,22 +146,21 @@ void displayOption(char Page_frames[], char* check, int Number_page) {
         LRUFunction(Page_frames, Number_page);
         break;
     default:
-    printf("\nPress again");
+        break;
     }
-    *check = x;
 }
 
 int main() {
+    // Tạo biến chuỗi tham chiếu
     char Page_frames[20];
+    // Reset values chuỗi tham chiếu
     resetValueOfPageFrams(Page_frames);
-    char check;
+    // Tạo biến số khung trang
     int Number_page;
-    while (1)
-    {
-        displayMenu(Page_frames, &check);
-        if (check == '3') break;
-        displayInputFrames(&Number_page);
-        displayOption(Page_frames, &check, Number_page);
-        break;
-    }
+    // Giao diện khởi tạo chuỗi tham chiếu
+    displayMenu(Page_frames);
+    // Giao diện nạp số khung trang
+    displayInputFrames(&Number_page);
+    // Giao diện chọn thuật toán thay trang
+    displayOption(Page_frames, Number_page);
 }
