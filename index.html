@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>IT007</title>
+</head>
+<body>
+    <form>
+        <label for="FramesNumber">Nhập số khung trang</label><br>
+        <input type="number" name="FramesNumber" value="3"><br>
+        <label for="Pages">Nhập dãy trang</label><br>
+        <input type="text" name="Pages"><br>
+        <label for="Algorithm">Giải thuật</label>
+        <select name="Algorithm">
+            <option value="FIFO">FIFO</option>
+            <option value="OPT">OPT</option>
+            <option value="LRU">LRU</option>
+            <option value="3">Cả 3 F-O-P</option>
+        </select>
+        <input type="button" onclick="Process()" value="Kết quả">
+    </form>
+    <table id="myTable"></table>
+    <script src="function.js"></script>
+</body>
+</html>

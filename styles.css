@@ -1,0 +1,11 @@
+td {
+    text-align: center;
+    padding: 0px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
+
+body {
+    background: linear-gradient(to left, #181718, #dd77eb);
+}
